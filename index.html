@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Greenheart — Systems Warming Up</title>
+  <meta name="description" content="Boot sequence online. Assets compiling. Greenheart // interactive." />
+  <style>
+    :root{
+      --bg1:#040607; --bg2:#0a0f12; --bg3:#0f1d17; --accent:#39ff88; --accent2:#00ffa3; --text:#e8fff5; --muted:#9eeec6;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      color:var(--text);
+      background: radial-gradient(1000px 700px at 20% 30%, var(--bg3), transparent 60%),
+                 radial-gradient(1000px 700px at 80% 70%, var(--bg2), transparent 60%),
+                 linear-gradient(135deg, var(--bg1), #000);
+      overflow:hidden;
+    }
+    .dot{position:absolute; width:4px; height:4px; background:rgba(157,78,221,.25); animation:float var(--dur) linear infinite; left:var(--x); top:var(--y)}
+    @keyframes float{to{transform:translateY(-120vh)}}
+
+    .center{position:relative; display:grid; place-items:center; height:100%; text-align:center; padding:2rem}
+
+    .card{
+      backdrop-filter: blur(10px); background:rgba(7,20,12,.18);
+      border:1px solid rgba(57,255,136,.25); border-radius:1.25rem; padding:2.25rem 2rem;
+      box-shadow:0 10px 40px rgba(0,0,0,.45);
+      max-width:720px; width:100%;
+    }
+
+    .logo{
+      width:94px; height:94px; display:inline-grid; place-items:center; margin-inline:auto 0; margin-bottom:1rem;
+      border-radius:18px; background:conic-gradient(from 210deg, var(--accent), #14d96d, #0fbf63, var(--accent));
+      box-shadow:0 0 34px rgba(57,255,136,.35), inset 0 0 18px rgba(0,0,0,.4);
+      animation:spin 14s linear infinite;
+    }
+    .logo svg{filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+
+    h1{font-weight:900; letter-spacing:.6px; margin:.25rem 0 0; font-size:clamp(1.8rem, 2.6vw + 1rem, 3rem); text-transform:uppercase}
+    p{opacity:.85; margin:.75rem auto 1.5rem; max-width:52ch}
+
+    .pill{display:inline-flex; align-items:center; gap:.5rem; border:1px solid rgba(57,255,136,.35); border-radius:999px; padding:.5rem .9rem; font-weight:700; letter-spacing:.3px; color:var(--muted); background:rgba(12,40,22,.22)}
+
+    .footer{opacity:.65; font-size:.9rem; margin-top:1.25rem}
+    .footer a{color:var(--accent); text-decoration:none}
+
+    .center, .card{position:relative; z-index:5}
+    .sub{opacity:.85; margin:.8rem auto 1.7rem; max-width:60ch}
+
+    .glitch{position:relative; display:inline-block}
+    .glitch:before,.glitch:after{content:attr(data-text); position:absolute; left:0; top:0; width:100%; height:100%; mix-blend-mode:screen; clip-path:inset(0 0 0 0)}
+    .glitch:before{transform:translate(2px,0); text-shadow:-2px 0 var(--accent); animation:gl1 2.2s infinite steps(2)}
+    .glitch:after{transform:translate(-2px,0); text-shadow:2px 0 var(--accent2); animation:gl2 2.8s infinite steps(2)}
+    @keyframes gl1{0%,100%{clip-path:inset(0 0 0 0)} 10%{clip-path:inset(10% 0 0 0)} 20%{clip-path:inset(0 0 80% 0)} 30%{clip-path:inset(40% 0 20% 0)} 40%{clip-path:inset(0 0 0 0)} 60%{clip-path:inset(60% 0 10% 0)}
+    @keyframes gl2{0%,100%{clip-path:inset(0 0 0 0)} 15%{clip-path:inset(0 0 70% 0)} 25%{clip-path:inset(30% 0 10% 0)} 55%{clip-path:inset(0 0 0 0)} 75%{clip-path:inset(10% 0 40% 0)}}
+
+    body:after{content:''; position:fixed; inset:0; pointer-events:none; background:repeating-linear-gradient(transparent,transparent 2px, rgba(0,0,0,.12) 3px); opacity:.25}
+
+    .cursor:after{content:'▍'; margin-left:.3ch; animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+  </style>
+</head>
+<body>
+  <script>
+    const n = 80;
+    for(let i=0;i<n;i++){
+      const d = document.createElement('div');
+      d.className='dot';
+      d.style.setProperty('--x', Math.random()*100 + 'vw');
+      d.style.setProperty('--y', (Math.random()*100 + 20) + 'vh');
+      d.style.setProperty('--dur', (15 + Math.random()*20) + 's');
+      document.body.appendChild(d);
+    }
+  </script>
+
+  <main class="center">
+    <section class="card">
+      <div class="logo">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 3L19 12L5 21V3Z" />
+        </svg>
+      </div>
+      <span class="pill">▲ Greenheart</span>
+      <h1 class="glitch" data-text="SYSTEMS WARMING UP">SYSTEMS WARMING UP</h1>
+      <p class="sub">Boot sequence online · Assets compiling · World seed: GH-2025</p>
+      <div class="footer">
+        <span>Status: <strong>in development</strong> · <span class="cursor">Press Start soon</span></span>
+        <div style="margin-top:.4rem; opacity:.6">© <span id="year"></span> Greenheart</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
